@@ -10,10 +10,8 @@ namespace WPFCRUDDemo
     /// </summary>
     public partial class EmployeeWindow : Window
     {
-        IDataService _dataService;
         public EmployeeWindow(IDataService dataService, EmployeeViewModel viewModel)
         {
-            _dataService = dataService;
             DataContext = viewModel;
             InitializeComponent();            
         }

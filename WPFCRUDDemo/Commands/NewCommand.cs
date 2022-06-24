@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WPFCRUDDemo.Services;
 using WPFCRUDDemo.ViewModel;
 
 namespace WPFCRUDDemo
 {
     public class NewCommand : BaseCommand
     {
+        private IDataService _dataService;
+        public NewCommand(IDataService dataService)
+        {
+            _dataService = dataService;
+        }
+
         public override bool CanExecute(object parameter)
         {
             return parameter is EmployeeViewModel;
@@ -18,15 +22,8 @@ namespace WPFCRUDDemo
         {
             var viewModel = (EmployeeViewModel)parameter;
             var employee = new Model.Employee();
-            var maxId = 0;
-            if (viewModel.Employee.Any())
-            {
-                maxId = viewModel.Employee.Max(f => f.Id);
-            }
-            employee.Id = maxId + 1;
             employee.BirthDate = new DateTime(1990, 1, 1);
-            employee.AdmissionDate = DateTime.Today;
-
+            employee.AdmissionDate = DateTime.Today;           
 
             var fw = new EditEmployee();
             fw.DataContext = employee;
@@ -34,6 +31,7 @@ namespace WPFCRUDDemo
 
             if (fw.DialogResult.HasValue && fw.DialogResult.Value)
             {
+                _dataService.AddEmployee(employee);
                 viewModel.Employee.Add(employee);
                 viewModel.SelectedEmployee = employee;
             }

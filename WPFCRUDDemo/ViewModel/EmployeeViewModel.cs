@@ -17,16 +17,19 @@ namespace WPFCRUDDemo.ViewModel
                 Edit.RaiseCanExecuteChanged();
             }
         }
-        public DeleteCommand Delete { get; private set; } = new DeleteCommand();
-        public NewCommand New { get; private set; } = new NewCommand();
-        public EditCommand Edit { get; private set; } = new EditCommand();
+        public DeleteCommand Delete { get; private set; }
+        public NewCommand New { get; private set; }
+        public EditCommand Edit { get; private set; }
 
         private IDataService _dataService;
 
-        public EmployeeViewModel(IDataService dataService)
+        public EmployeeViewModel(IDataService dataService, NewCommand newCommand, EditCommand editCommand, DeleteCommand deleteCommand)
         {               
             _dataService = dataService;
-            Employee = new System.Collections.ObjectModel.ObservableCollection<Model.Employee>(_dataService.GetEmployee()); // já implementa as interfaces de notificação de alteração de coleções
+            Employee = new System.Collections.ObjectModel.ObservableCollection<Model.Employee>(_dataService.GetEmployee());
+            New = newCommand;
+            Delete = deleteCommand;
+            Edit = editCommand;
             SelectedEmployee = Employee.FirstOrDefault();
         }
     }

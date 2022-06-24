@@ -32,11 +32,14 @@ namespace WPFCRUDDemo
         {
             services.AddDbContext<EmployeeDbContext>(options =>
             {
-                options.UseSqlite("Data Source = Employee.db");
+                options.UseSqlite("Data Source=Employee.db");
             });
             services.AddScoped<IDataService, DataService>();
             services.AddSingleton<EmployeeViewModel>();
             services.AddSingleton<EmployeeWindow>();
+            services.AddSingleton<NewCommand>();
+            services.AddSingleton<DeleteCommand>();
+            services.AddSingleton<EditCommand>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
