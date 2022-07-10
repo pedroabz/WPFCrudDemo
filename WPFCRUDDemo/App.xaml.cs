@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFCRUDDemo.Commands;
 using WPFCRUDDemo.Model;
 using WPFCRUDDemo.Services;
 using WPFCRUDDemo.ViewModel;
@@ -38,6 +39,7 @@ namespace WPFCRUDDemo
             services.AddSingleton<EmployeeViewModel>();
             services.AddSingleton<EmployeeWindow>();
             services.AddSingleton<NewCommand>();
+            services.AddSingleton<SearchCommand>();
             services.AddSingleton<DeleteCommand>();
             services.AddSingleton<EditCommand>();
         }

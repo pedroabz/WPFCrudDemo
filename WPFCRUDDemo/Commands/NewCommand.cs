@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using WPFCRUDDemo.Services;
 using WPFCRUDDemo.ViewModel;
 
@@ -21,12 +20,16 @@ namespace WPFCRUDDemo
         public override void Execute(object parameter)
         {
             var viewModel = (EmployeeViewModel)parameter;
-            var employee = new Model.Employee();
-            employee.BirthDate = new DateTime(1990, 1, 1);
-            employee.AdmissionDate = DateTime.Today;           
+            var employee = new Model.Employee
+            {
+                BirthDate = new DateTime(1990, 1, 1),
+                AdmissionDate = DateTime.Today
+            };
 
-            var fw = new EditEmployee();
-            fw.DataContext = employee;
+            var fw = new EditEmployee
+            {
+                DataContext = employee
+            };
             fw.ShowDialog();
 
             if (fw.DialogResult.HasValue && fw.DialogResult.Value)
